@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Droid Huntr</string>
-    <string name="obligitory_string">Testing</string>
+    <string name="obligatory_string">Testing</string>
+    <string name="obligatory_string2">Testing</string>
 </resources>
