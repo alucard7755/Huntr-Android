@@ -24,12 +24,15 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
 
+        mTitle = getTitle();
+        //String coverID = this.getIntent().getExtras().getString("coverID");
         // Set up the drawer.
+
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout_chat));
+
     }
 
     @Override
@@ -39,26 +42,26 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
                 mTitle = getString(R.string.title_section1);
                 Log.d("omg android", position + "GameHome");
                 startActivity(new Intent(this, GameHome.class));
-                break;
+                return;
             case 1:
-                mTitle = getString(R.string.title_section2);
+                //mTitle = getString(R.string.title_section2);
                 Log.d("omg android", position + "Standings" );
                 startActivity(new Intent(this, StandingsActivity.class));
-                break;
+                return;
             case 2:
-                mTitle = getString(R.string.title_section3);
+                //mTitle = getString(R.string.title_section3);
                 Log.d("omg android", position + "Standings" );
                 //startActivity(new Intent(this, ChatActivity.class));
-                break;
+                return;
         }
     }
+
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

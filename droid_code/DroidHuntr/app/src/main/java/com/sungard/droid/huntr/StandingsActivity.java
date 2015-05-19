@@ -20,15 +20,15 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standings);
-
+        /*
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        */
     }
 
     @Override
@@ -57,17 +57,17 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
     public void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
-                mTitle = getString(R.string.title_section1);
+                //mTitle = getString(R.string.title_section1);
                 Log.d("omg android", position + "GameHome");
                 startActivity(new Intent(this, GameHome.class));
                 break;
             case 1:
-                mTitle = getString(R.string.title_section2);
-                Log.d("omg android", position + "Standings" );
+                //mTitle = getString(R.string.title_section2);
+                Log.d("omg android", position + "Standings");
                 //startActivity(new Intent(this, StandingsActivity.class));
                 break;
             case 2:
-                mTitle = getString(R.string.title_section3);
+                //mTitle = getString(R.string.title_section3);
                 Log.d("omg android", position + "Standings" );
                 startActivity(new Intent(this, ChatActivity.class));
                 break;

@@ -59,20 +59,23 @@ public class GameHome extends ActionBarActivity
         */
         switch (position) {
             case 0:
-                //mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.title_section1);
                 Log.d("omg android", position + "GameHome");
                 //startActivity(new Intent(this, GameHome.class));
-                break;
+                return;
             case 1:
-                mTitle = getString(R.string.title_section2);
+                //mTitle = getString(R.string.title_section2);
                 Log.d("omg android", position + "Standings" );
                 startActivity(new Intent(this, StandingsActivity.class));
-                break;
+                return;
             case 2:
                 mTitle = getString(R.string.title_section3);
-                Log.d("omg android", position + "Standings" );
+                Log.d("omg android", position + "Chat");
                 startActivity(new Intent(this, ChatActivity.class));
-                break;
+                //Intent detailIntent = new Intent(this, ChatActivity.class);
+                //detailIntent.putExtra("title", getString(R.string.title_section3));
+                //startActivity(detailIntent);
+                return;
         }
 
     }
