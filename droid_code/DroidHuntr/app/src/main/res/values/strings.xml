@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Droid Huntr</string>
     <string name="obligitory_string">Testing</string>
+    <string name="title_activity_game_home">GameHome</string>
+
+    <string name="title_section1">Clues</string>
+    <string name="title_section2">Standings</string>
+    <string name="title_section3">Chat</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
