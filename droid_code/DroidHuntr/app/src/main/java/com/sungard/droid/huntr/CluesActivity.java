@@ -1,24 +1,17 @@
 package com.sungard.droid.huntr;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class CluesActivity extends ActionBarActivity
@@ -33,11 +26,14 @@ public class CluesActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    ListView clueListView;
+    ArrayAdapter mArrayAdapter;
+    ArrayList mClueList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_home);
+        setContentView(R.layout.activity_clues);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -47,6 +43,16 @@ public class CluesActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //Fake clues in a list for demonstration
+        mArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                mClueList);
+        mClueList.add("Testing");
+        mClueList.add("Testing2");
+        mClueList.add("Testing3");
+        clueListView = (ListView) findViewById(R.id.cluelistView);
+        clueListView.setAdapter(mArrayAdapter);
 
 
     }

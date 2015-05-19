@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class StandingsActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -16,6 +20,10 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private CharSequence mTitle;
+
+    ListView standListView;
+    ArrayAdapter mArrayAdapter;
+    ArrayList mStandList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,17 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout_standings));
+
+        //Fake clues in a list for demonstration
+        mArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                mStandList);
+        mStandList.add("1. Mavericks");
+        mStandList.add("2. Some Other B-Ball team");
+        mStandList.add("3. Lame-o McGees");
+        standListView = (ListView) findViewById(R.id.standings_listView);
+        standListView.setAdapter(mArrayAdapter);
+
     }
 
     @Override
