@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-public class GameHome extends ActionBarActivity
+public class CluesActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -47,6 +47,8 @@ public class GameHome extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
@@ -59,9 +61,9 @@ public class GameHome extends ActionBarActivity
         */
         switch (position) {
             case 0:
-                mTitle = getString(R.string.title_section1);
-                Log.d("omg android", position + "GameHome");
-                //startActivity(new Intent(this, GameHome.class));
+                //mTitle = getString(R.string.title_section1);
+                Log.d("omg android", position + "CluesActivity");
+                //startActivity(new Intent(this, CluesActivity.class));
                 return;
             case 1:
                 //mTitle = getString(R.string.title_section2);
@@ -72,9 +74,6 @@ public class GameHome extends ActionBarActivity
                 mTitle = getString(R.string.title_section3);
                 Log.d("omg android", position + "Chat");
                 startActivity(new Intent(this, ChatActivity.class));
-                //Intent detailIntent = new Intent(this, ChatActivity.class);
-                //detailIntent.putExtra("title", getString(R.string.title_section3));
-                //startActivity(detailIntent);
                 return;
         }
 
@@ -114,6 +113,7 @@ public class GameHome extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
@@ -155,7 +155,7 @@ public class GameHome extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((GameHome) activity).onSectionAttached(
+            ((CluesActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }*/

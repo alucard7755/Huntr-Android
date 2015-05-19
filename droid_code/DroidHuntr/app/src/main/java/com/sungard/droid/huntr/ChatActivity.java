@@ -40,11 +40,11 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
         switch (position) {
             case 0:
                 mTitle = getString(R.string.title_section1);
-                Log.d("omg android", position + "GameHome");
-                startActivity(new Intent(this, GameHome.class));
+                Log.d("omg android", position + "CluesActivity");
+                startActivity(new Intent(this, CluesActivity.class));
                 return;
             case 1:
-                //mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.title_section2);
                 Log.d("omg android", position + "Standings" );
                 startActivity(new Intent(this, StandingsActivity.class));
                 return;
@@ -69,7 +69,7 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.game_home, menu);
+            getMenuInflater().inflate(R.menu.menu_chat, menu);
             restoreActionBar();
             return true;
         }
@@ -85,6 +85,7 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 

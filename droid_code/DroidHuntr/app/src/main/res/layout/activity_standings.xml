@@ -1,12 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.sungard.droid.huntr.StandingsActivity">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout_standings"
+android:layout_width="match_parent" android:layout_height="match_parent"
+tools:context="com.sungard.droid.huntr.StandingsActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+<FrameLayout android:id="@+id/standings_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Standings Activity"
+        android:id="@+id/stand_textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</FrameLayout>
+
+
+<fragment android:id="@+id/navigation_drawer"
+    android:layout_width="@dimen/navigation_drawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:name="com.sungard.droid.huntr.NavigationDrawerFragment"
+    tools:layout="@layout/fragment_navigation_drawer" />
+
+
+
+</android.support.v4.widget.DrawerLayout>

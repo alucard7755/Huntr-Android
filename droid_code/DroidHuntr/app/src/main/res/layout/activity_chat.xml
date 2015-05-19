@@ -3,7 +3,8 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context="com.sungard.droid.huntr.ChatActivity">
 
-    <FrameLayout android:id="@+id/container1" android:layout_width="match_parent"
+    <FrameLayout android:id="@+id/container1"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <TextView
@@ -18,7 +19,8 @@
 
 
     <fragment android:id="@+id/navigation_drawer"
-        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:name="com.sungard.droid.huntr.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
