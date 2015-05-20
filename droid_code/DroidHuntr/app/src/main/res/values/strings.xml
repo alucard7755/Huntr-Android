@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Droid Huntr</string>
-    <string name="obligitory_string">Testing</string>
+    <string name="title_activity_select_game">Select Game</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
