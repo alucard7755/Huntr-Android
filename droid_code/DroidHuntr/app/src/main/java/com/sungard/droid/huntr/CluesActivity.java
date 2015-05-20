@@ -48,6 +48,7 @@ public class CluesActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+
         //Access the list and set the listener to it
         clueListView = (ListView) findViewById(R.id.cluelistView);
         clueListView.setOnItemClickListener(this);
@@ -63,8 +64,6 @@ public class CluesActivity extends ActionBarActivity
         mClueList.add("Testing3");
         clueListView = (ListView) findViewById(R.id.cluelistView);
         clueListView.setAdapter(mArrayAdapter);
-
-
     }
 
     @Override
@@ -94,6 +93,7 @@ public class CluesActivity extends ActionBarActivity
         }
 
     }
+
 
     //public void onSectionAttached(int number) {
     //}
