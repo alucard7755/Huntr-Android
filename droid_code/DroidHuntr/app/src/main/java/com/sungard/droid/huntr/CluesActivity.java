@@ -8,14 +8,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
 public class CluesActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, AdapterView.OnItemClickListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -44,7 +48,13 @@ public class CluesActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        //Access the list and set the listener to it
+        clueListView = (ListView) findViewById(R.id.cluelistView);
+        clueListView.setOnItemClickListener(this);
+
+
         //Fake clues in a list for demonstration
+        //TODO: change to API call to populate the list
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mClueList);
@@ -85,9 +95,34 @@ public class CluesActivity extends ActionBarActivity
 
     }
 
-    public void onSectionAttached(int number) {
+    //public void onSectionAttached(int number) {
+    //}
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        // Log the item's position and contents
+        // to the console in Debug
+        Log.d("omg android", position + ": " + mClueList.get(position));
+
+        // 12. Now that the user's chosen a book, grab the cover data
+        //JSONObject jsonObject = (JSONObject) mJSONAdapter.getItem(position);
+        //String coverID = jsonObject.optString("cover_i","");
+
+        // create an Intent to take you over to a new DetailActivity
+        Intent detailIntent = new Intent(this, ClueDetailActivity.class);
+
+        // pack away the data about the cover
+        // into your Intent before you head out
+        detailIntent.putExtra("clueID", mClueList.get(position).toString());
+
+        // TODO: adjust these calls for the HuntR API
+
+        // start the next Activity using your prepared Intent
+        startActivity(detailIntent);
     }
+
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -126,44 +161,6 @@ public class CluesActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    /*public static class PlaceholderFragment extends Fragment {
-         **
-         * The fragment argument representing the section number for this
-         * fragment.
 
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        **
-         * Returns a new instance of this fragment for the given section
-         * number.
-         *
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_game_home, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((CluesActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }*/
 
 }
