@@ -39,6 +39,9 @@ public class CluesActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clues);
 
+        ActionBar actionBar = getSupportActionBar();
+
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -64,6 +67,7 @@ public class CluesActivity extends ActionBarActivity
         mClueList.add("Testing3");
         clueListView = (ListView) findViewById(R.id.cluelistView);
         clueListView.setAdapter(mArrayAdapter);
+
     }
 
     @Override
@@ -129,6 +133,7 @@ public class CluesActivity extends ActionBarActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+
     }
 
 
