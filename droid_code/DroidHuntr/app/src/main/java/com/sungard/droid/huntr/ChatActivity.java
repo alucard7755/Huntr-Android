@@ -33,6 +33,8 @@ public class ChatActivity extends ActionBarActivity implements NavigationDrawerF
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout_chat));
 
+        //TODO: Get with Trey and figure out if this is happening
+
     }
 
     @Override

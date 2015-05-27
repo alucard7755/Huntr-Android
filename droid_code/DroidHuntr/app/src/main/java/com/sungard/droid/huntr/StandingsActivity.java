@@ -39,7 +39,8 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout_standings));
 
-        //Fake clues in a list for demonstration
+        //TODO: Need to make API call to bring down teams and their rankings
+        //Fake Teams in a list for demonstration
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mStandList);

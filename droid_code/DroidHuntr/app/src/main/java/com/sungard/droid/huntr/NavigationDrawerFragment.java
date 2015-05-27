@@ -108,6 +108,9 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section3),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+        //TODO: Add API call for time remaining and create a countdown time to go in this slider
+
         return mDrawerListView;
     }
 
