@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Droid Huntr</string>
-<<<<<<< HEAD
+
     <string name="obligatory_string">Testing</string>
     <string name="obligatory_string2">Testing</string>
-    <string name="hello_world">User</string>
+
     <string name="edit_username">User Name</string>
     <string name="button_createuser">Create User</string>
     <string name="button_selectteam">Join Team</string>
@@ -12,7 +12,7 @@
     <string name="edit_teamname">Team Name</string>
     <string name="title_activity_selectteam">Select Team</string>
     <string name="title_activity_createuser">New User</string>
-    <string name="action_settings">Settings</string>
+
     <string-array name="spinner">
         <item>Mercury</item>
         <item>Venus</item>
@@ -26,7 +26,7 @@
     <string name="title_activity_createteam">New Team</string>
 =======
     <string name="obligitory_string">Testing</string>
-<<<<<<< HEAD
+
 =======
     <string name="title_activity_game_home">Clues</string>
 
