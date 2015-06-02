@@ -1,4 +1,25 @@
 <resources>
     <string name="app_name">Droid Huntr</string>
     <string name="obligitory_string">Testing</string>
+<<<<<<< HEAD
+=======
+    <string name="title_activity_game_home">Clues</string>
+
+
+    <string name="title_section1">Clues</string>
+    <string name="title_section2">Standings</string>
+    <string name="title_section3">Chat</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="search_clues">Search!</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_standings">StandingsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_clue_detail">ClueDetailActivity</string>
+>>>>>>> Nicks_2nd_attempt_at_drawers
 </resources>
