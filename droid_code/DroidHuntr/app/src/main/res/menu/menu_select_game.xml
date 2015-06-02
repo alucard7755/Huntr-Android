@@ -6,7 +6,7 @@
         android:id="@+id/action_preferences"
         android:title="Preferences"
         android:orderInCategory="100"
-        app:showAsAction="never">
+        app:showAsAction="never"/>
 
         <menu>
             <item
@@ -18,5 +18,5 @@
 
         </menu>
 
-        </item>
+
 </menu>
