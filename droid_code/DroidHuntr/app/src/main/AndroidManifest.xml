@@ -1,11 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sungard.droid.huntr">
-<<<<<<< HEAD
-
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
-
-=======
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -45,7 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sungard.droid.huntr.CluesActivity" />
         </activity>
->>>>>>> Nicks_2nd_attempt_at_drawers
+
+
     </application>
 
 </manifest>
