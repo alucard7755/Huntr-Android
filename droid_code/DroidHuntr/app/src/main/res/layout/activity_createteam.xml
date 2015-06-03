@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/imageView"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.45" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.24" />
+    <EditText android:id="@+id/edit_message2"
+
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:hint="@string/edit_teamname"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.06"
+        android:textSize="30sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.04" />
+
+    <Button
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:text="@string/button_createteam"
+        android:id="@+id/button_createteam"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.08"
+        android:textSize="20sp"
+        android:onClick="createNewTeam" />
+
+</LinearLayout>
