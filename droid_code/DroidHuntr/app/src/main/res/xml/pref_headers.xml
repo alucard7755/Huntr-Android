@@ -2,15 +2,14 @@
 
     <!-- These settings headers are only used on tablets. -->
 
-    <header android:fragment="com.sungard.droid.huntr.PreferencesActivity$GeneralPreferenceFragment"
+    <header android:fragment="com.sungard.droid.huntr.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="com.sungard.droid.huntr.PreferencesActivity$NotificationPreferenceFragment"
+        android:fragment="com.sungard.droid.huntr.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
-    <header
-        android:fragment="com.sungard.droid.huntr.PreferencesActivity$DataSyncPreferenceFragment"
+    <header android:fragment="com.sungard.droid.huntr.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" />
 
 </preference-headers>
