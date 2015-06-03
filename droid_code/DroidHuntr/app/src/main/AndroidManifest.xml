@@ -2,20 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sungard.droid.huntr" >
 
+<<<<<<< HEAD
 =======
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 >>>>>>> origin/master
+=======
+>>>>>>> origin/tylerbranch
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+<<<<<<< HEAD
             android:name=".createuser"
             android:label="@string/title_activity_createuser" >
+=======
+            android:name=".SelectGame"
+            android:label="@string/title_activity_select_game" >
+>>>>>>> origin/tylerbranch
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +36,7 @@
             android:label="@string/title_activity_game_home" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".StandingsActivity"
             android:label="@string/title_activity_standings" >
         </activity>
@@ -65,6 +74,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sungard.droid.huntr.selectteam" />
+=======
+            android:name=".PreferencesActivity"
+            android:label="@string/title_activity_preferences" >
+>>>>>>> origin/tylerbranch
         </activity>
     </application>
 
