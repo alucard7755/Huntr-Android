@@ -1,18 +1,27 @@
 package com.sungard.droid.huntr;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
-public class createteam extends ActionBarActivity {
+public class CreateTeamActivity extends ActionBarActivity implements View.OnClickListener{
+
+    private Button createTeamButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createteam);
+
+        createTeamButton = (Button) findViewById(R.id.edit_message2);
+        createTeamButton.setOnClickListener(this);
     }
 
     @Override
@@ -37,8 +46,23 @@ public class createteam extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createNewTeam(View view) {
 
-        //TODO Add API call to add new team
+    @Override
+    public void onClick(View v) {
+        //if button clicked, check which one
+        if(v.equals(createTeamButton)) {
+            //if take picture button, open camera
+            EditText editTeam = (EditText) findViewById(R.id.edit_message2);
+            Toast.makeText(this, "Create Team" + editTeam.toString(),
+                    Toast.LENGTH_SHORT).show();
+            Intent toTeamIntnet = new Intent(this, CluesActivity.class);
+
+            toTeamIntnet.putExtra("teamName", editTeam.toString());
+
+            // TODO: adjust these calls for the HuntR API
+
+            startActivity(toTeamIntnet);
+        }
     }
 }
+

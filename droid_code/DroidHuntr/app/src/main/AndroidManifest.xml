@@ -11,18 +11,43 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".createuser"
-            android:label="@string/title_activity_createuser" >
-        </activity>
 
         <activity
-            android:name=".SelectGame"
+            android:name=".SelectGameActivity"
             android:label="@string/title_activity_select_game" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CreateUserActivity"
+            android:label="@string/title_activity_createuser" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SelectGameActivity" />
+        </activity>
+
+        <activity
+            android:name=".SelectTeamActivity"
+            android:label="@string/title_activity_selectteam"
+            android:parentActivityName=".CreateUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CreateUserActivity" />
+        </activity>
+        <activity
+            android:name=".CreateTeamActivity"
+            android:label="@string/title_activity_createteam"
+            android:parentActivityName=".SelectTeamActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SelectTeamActivity" />
+
+            android:name=".PreferencesActivity"
+            android:label="@string/title_activity_preferences" >
+
         </activity>
 
         <activity
@@ -52,26 +77,7 @@
                 android:value="com.sungard.droid.huntr.CluesActivity" />
         </activity>
 
-        <activity
-            android:name=".selectteam"
-            android:label="@string/title_activity_selectteam"
-            android:parentActivityName=".createuser" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sungard.droid.huntr.createuser" />
-        </activity>
-        <activity
-            android:name=".createteam"
-            android:label="@string/title_activity_createteam"
-            android:parentActivityName=".selectteam" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sungard.droid.huntr.selectteam" />
 
-            android:name=".PreferencesActivity"
-            android:label="@string/title_activity_preferences" >
-
-        </activity>
     </application>
 
 </manifest>
