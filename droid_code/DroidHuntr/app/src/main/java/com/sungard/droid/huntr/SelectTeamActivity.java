@@ -21,7 +21,7 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
     ListView teamListView;
     ArrayAdapter mTeamAdapter;
     ArrayList mTeamList = new ArrayList();
-    private Button selectNewTeam;
+    Button selectNewTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +31,19 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
         teamListView = (ListView) findViewById(R.id.teamListView);
         teamListView.setOnItemClickListener(this);
 
-        selectNewTeam = (Button) findViewById(R.id.button_createteam);
+        selectNewTeam = (Button) findViewById(R.id.button_newteam);
         selectNewTeam.setOnClickListener(this);
 
 
         //Fake clues in a list for demonstration
+        mTeamList.add("Mavs");
+        mTeamList.add("UTD Comets");
+        mTeamList.add("Baylor Bears... I guess");
         //TODO: change to API call to populate the list
         mTeamAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mTeamList);
-        mTeamList.add("Mavs");
-        mTeamList.add("UTD Comets");
-        mTeamList.add("Baylor Bears... I guess");
+
         teamListView = (ListView) findViewById(R.id.teamListView);
         teamListView.setAdapter(mTeamAdapter);
 
@@ -84,6 +85,19 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
         Intent intent = new Intent(this, CreateTeamActivity.class);
         startActivity(intent);
     }*/
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+    } // end on resume
+
+    /* Remove the locationlistener updates when Activity is paused */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //locationManager.removeUpdates(this);
+    } //end on pause
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

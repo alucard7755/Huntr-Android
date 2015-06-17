@@ -57,4 +57,14 @@ public class CreateUserActivity extends ActionBarActivity implements View.OnClic
             startActivity(toTeamIntnet);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    } // end on resume
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    } //end on pause
 }

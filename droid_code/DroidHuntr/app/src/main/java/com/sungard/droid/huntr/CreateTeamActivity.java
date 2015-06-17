@@ -20,7 +20,7 @@ public class CreateTeamActivity extends ActionBarActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createteam);
 
-        createTeamButton = (Button) findViewById(R.id.edit_message2);
+        createTeamButton = (Button) findViewById(R.id.button_createteam);
         createTeamButton.setOnClickListener(this);
     }
 
@@ -64,5 +64,17 @@ public class CreateTeamActivity extends ActionBarActivity implements View.OnClic
             startActivity(toTeamIntnet);
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+    } // end on resume
+
+    /* Remove the locationlistener updates when Activity is paused */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //locationManager.removeUpdates(this);
+    } //end on pause
 }
 
