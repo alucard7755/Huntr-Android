@@ -1,17 +1,37 @@
 package com.sungard.droid.huntr;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class StandingsActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -21,6 +41,7 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
 
     private CharSequence mTitle;
 
+    //HuntrAPI mAPI = new HuntrAPI();
     ListView standListView;
     ArrayAdapter mArrayAdapter;
     ArrayList mStandList = new ArrayList();
@@ -33,6 +54,7 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        final HuntrAPI mAPI = ((HuntrApplication)getApplicationContext()).getHuntrAPI();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -44,11 +66,49 @@ public class StandingsActivity extends ActionBarActivity implements NavigationDr
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mStandList);
-        mStandList.add("1. Mavericks");
-        mStandList.add("2. Some Other B-Ball team");
-        mStandList.add("3. Lame-o McGees");
+        //Standings myStandings = new Standings();
+        //myStandings.getCurrentStandings("53a5df155fbcd10200831406");
+
+        if (mAPI.isNetworkActive(this))
+        {
+            mAPI.getStandingsList(this,"53a5df155fbcd10200831406",
+                    new HuntrAPI.StandingsResponseHandler(){
+                        @Override
+                        public void onSuccess(ArrayList response){
+                            mStandList.clear();
+                            for (int i=0;i<response.size();i++){
+                                mStandList.add(String.valueOf(mAPI.scoreboard.getEntries().get(i).getRanking()) +
+                                        " " + mAPI.scoreboard.getEntries().get(i).getName() +
+                                                " "+ String.valueOf(mAPI.scoreboard.getEntries().get(i).getScore())
+                                );
+
+                                //mStandList.add(response.get(i));
+                            };
+                        }
+
+                        @Override
+                        public void onFailure(ArrayList response){
+                            mStandList.clear();
+                            mStandList.add("1. No Response from Server");
+                            //standListView = (ListView) findViewById(R.id.standings_listView);
+                            //standListView.setAdapter(mArrayAdapter);
+
+                        }
+                    });
+
+
+            //for (int i=0; i < myScoreArray.size(); i++) {
+            //    myScore = myScoreArray.get(i).getAsJsonObject();
+            //    Log.d("JSONLog", myScore.get("name").getAsString());
+            //    mStandList.add(String.valueOf(myScore.get("ranking")+". " + myScore.get("name").getAsString()));
+                //mStandList.add("2. Some Other B-Ball team");
+                //mStandList.add("3. Lame-o McGees");
+            //}
+
+        }
         standListView = (ListView) findViewById(R.id.standings_listView);
         standListView.setAdapter(mArrayAdapter);
+
 
     }
 
