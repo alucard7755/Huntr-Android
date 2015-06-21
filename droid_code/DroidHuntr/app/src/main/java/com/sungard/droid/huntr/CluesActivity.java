@@ -14,6 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.json.JSONObject;
+import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -33,11 +39,14 @@ public class CluesActivity extends ActionBarActivity
     ListView clueListView;
     ArrayAdapter mArrayAdapter;
     ArrayList mClueList = new ArrayList();
+    //HuntrAPI mAPI = new HuntrAPI();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clues);
+
+        HuntrAPI mAPI = ((HuntrApplication)getApplicationContext()).getHuntrAPI();
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -62,11 +71,43 @@ public class CluesActivity extends ActionBarActivity
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mClueList);
-        mClueList.add("Testing");
-        mClueList.add("Testing2");
-        mClueList.add("Testing3");
-        clueListView = (ListView) findViewById(R.id.cluelistView);
-        clueListView.setAdapter(mArrayAdapter);
+        if (mAPI.isNetworkActive(this))
+        {
+            mAPI.getCluesList(this, "53a5df155fbcd10200831406",
+                    new HuntrAPI.CluesResponseHandler() {
+                        @Override
+                        public void onSuccess(ArrayList response) {
+                            mClueList.clear();
+                            for (int i = 0; i < response.size(); i++) {
+                                mClueList.add(response.get(i));
+                            }
+                            ;
+                            clueListView = (ListView) findViewById(R.id.cluelistView);
+                            clueListView.setAdapter(mArrayAdapter);
+
+                        }
+
+                        @Override
+                        public void onFailure(ArrayList response) {
+                            mClueList.clear();
+                            mClueList.add("*** No Response from Server ***");
+                            clueListView = (ListView) findViewById(R.id.cluelistView);
+                            clueListView.setAdapter(mArrayAdapter);
+
+                            //standListView = (ListView) findViewById(R.id.standings_listView);
+                            //standListView.setAdapter(mArrayAdapter);
+
+                        }
+                    });
+
+
+        }
+
+        //mClueList.add("Testing");
+        //mClueList.add("Testing2");
+        //mClueList.add("Testing3");
+        //clueListView = (ListView) findViewById(R.id.cluelistView);
+        //clueListView.setAdapter(mArrayAdapter);
 
     }
 

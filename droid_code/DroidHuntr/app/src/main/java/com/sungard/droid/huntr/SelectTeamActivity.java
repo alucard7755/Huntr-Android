@@ -31,7 +31,7 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
         teamListView = (ListView) findViewById(R.id.teamListView);
         teamListView.setOnItemClickListener(this);
 
-        selectNewTeam = (Button) findViewById(R.id.button_newteam);
+        selectNewTeam = (Button) findViewById(R.id.button_createteam);
         selectNewTeam.setOnClickListener(this);
 
 
@@ -43,7 +43,7 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
         mTeamAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mTeamList);
-
+                
         teamListView = (ListView) findViewById(R.id.teamListView);
         teamListView.setAdapter(mTeamAdapter);
 
@@ -85,7 +85,7 @@ public class SelectTeamActivity extends ActionBarActivity implements AdapterView
         Intent intent = new Intent(this, CreateTeamActivity.class);
         startActivity(intent);
     }*/
-
+    
     @Override
     protected void onResume() {
         super.onResume();

@@ -17,9 +17,8 @@ import java.util.ArrayList;
 
 public class SelectGameActivity extends ActionBarActivity implements AdapterView.OnItemClickListener  {
 
-    ListView teamListView;
+    ListView gameListView;
     ArrayList mGameList = new ArrayList();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +27,46 @@ public class SelectGameActivity extends ActionBarActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_game);
 
-        mGameList.add("Mavs Rule The World");
-        mGameList.add("SunGard Peeps");
-        mGameList.add("Droid Supremacy");
+        HuntrAPI mAPI = ((HuntrApplication)getApplicationContext()).getHuntrAPI();
+        //new HuntrAPI();
+
+        //mGameList.add("Mavs Rule The World");
+        //mGameList.add("SunGard Peeps");
+        //mGameList.add("Droid Supremacy");
+        if (mAPI.isNetworkActive(this))
+        {
+            mAPI.getGamesList(this,/*"53a5df155fbcd10200831406",*/
+                    new HuntrAPI.GamesResponseHandler(){
+                        @Override
+                        public void onSuccess(ArrayList response){
+                            mGameList.clear();
+                            for (int i=0;i<response.size();i++){
+                                mGameList.add(response.get(i));
+                            };
+                        }
+
+                        @Override
+                        public void onFailure(ArrayList response){
+                            mGameList.clear();
+                            mGameList.add("*** No Response from Server ***");
+                            //standListView = (ListView) findViewById(R.id.standings_listView);
+                            //standListView.setAdapter(mArrayAdapter);
+
+                        }
+                    });
+
+
+        }
+
 
         ArrayAdapter<String> zeAdapter = new ArrayAdapter<String>(
                 this,                   //context for activity
                 R.layout.game_list,     //layout to be used (create)
                 mGameList);               //items to be displayed
 
-        teamListView = (ListView) findViewById(R.id.listView);
-        teamListView.setAdapter(zeAdapter);
-        teamListView.setOnItemClickListener(this);
+        gameListView = (ListView) findViewById(R.id.listView);
+        gameListView.setAdapter(zeAdapter);
+        gameListView.setOnItemClickListener(this);
 
     }
 
@@ -60,7 +87,7 @@ public class SelectGameActivity extends ActionBarActivity implements AdapterView
 
         // pack away the data about the cover
         // into your Intent before you head out
-        detailIntent.putExtra("teamName", mGameList.get(position).toString());
+        detailIntent.putExtra("gameName", mGameList.get(position).toString());
 
         // TODO: adjust these calls for the HuntR API
 
