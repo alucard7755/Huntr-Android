@@ -48,16 +48,16 @@ public class CreateUserActivity extends ActionBarActivity implements View.OnClic
             EditText editUser = (EditText) findViewById(R.id.edit_username);
             Toast.makeText(this, "Create User" + editUser.toString(),
                     Toast.LENGTH_SHORT).show();
-            Intent toTeamIntnet = new Intent(this, SelectTeamActivity.class);
+            Intent toTeamIntent = new Intent(this, SelectTeamActivity.class);
 
-            toTeamIntnet.putExtra("userName", editUser.toString());
+            toTeamIntent.putExtra("userName", editUser.toString());
 
             // TODO: adjust these calls for the HuntR API
 
-            startActivity(toTeamIntnet);
+            startActivity(toTeamIntent);
         }
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();

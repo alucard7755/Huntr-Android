@@ -55,13 +55,13 @@ public class CreateTeamActivity extends ActionBarActivity implements View.OnClic
             EditText editTeam = (EditText) findViewById(R.id.edit_message2);
             Toast.makeText(this, "Create Team" + editTeam.toString(),
                     Toast.LENGTH_SHORT).show();
-            Intent toTeamIntnet = new Intent(this, CluesActivity.class);
+            Intent toTeamIntent = new Intent(this, CluesActivity.class);
 
-            toTeamIntnet.putExtra("teamName", editTeam.toString());
+            toTeamIntent.putExtra("teamName", editTeam.toString());
 
             // TODO: adjust these calls for the HuntR API
 
-            startActivity(toTeamIntnet);
+            startActivity(toTeamIntent);
         }
     }
     @Override
@@ -77,4 +77,5 @@ public class CreateTeamActivity extends ActionBarActivity implements View.OnClic
         //locationManager.removeUpdates(this);
     } //end on pause
 }
+
 
