@@ -19,6 +19,8 @@ import org.apache.http.Header;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 // HUNTR API Calls Supported
@@ -27,14 +29,26 @@ import java.util.ArrayList;
 // GET  <host>/api/clues/<gameID>/<clueID>
 // POST <host>/api/answers/location/<clueID>/<teamID>/<playerName> with params("latitude","longitude")
 
-public class HuntrAPI {
+public class HuntrAPIClient {
 
     // Wrapper Class for API calls and other utility functions
 
     private String mGameID;
     private String mTeamID;
     private String mUserID;
-    private String BASE_URL="http://huntr-api.herokuapp.com/";
+    private static String API_BASE_URL="http://huntr-api.herokuapp.com/";
+    private static String API_ANSWERS="api/answers"; // List of Answer IDs for this game id and team id
+    private static String API_SCOREBOARD="api/game/scoreboard";
+    private static String API_GAMELIST_SIMPLE="api/game/simple";
+    private static String API_GAMELIST_ALL="api/games/all";
+    private static String API_ADD_BREADCRUMB="api/player/locationUpdate/breadcrumbs";
+    private static String API_ANSWERS_LOCATION="api/answers/location";
+    private static String API_ANSWERS_PHOTO="api/answers/photo";
+    private static String API_CLUES="api/clues";
+    private static String API_RELOAD_GAME="api/game";
+    private static String API_ADD_NEW_TEAM="api/team";
+    private static String API_ADD_PLAYER="api/player";
+
     private AsyncHttpClient scoreboardclient = new AsyncHttpClient();
     private AsyncHttpClient gamelistclient = new AsyncHttpClient();
     private AsyncHttpClient cluelistclient = new AsyncHttpClient();
@@ -47,33 +61,33 @@ public class HuntrAPI {
     private boolean cluesRetrieved=false;
 
 
-    public HuntrAPI HuntrAPI(){
+    public HuntrAPIClient HuntrAPIClient(){
         this.mGameID="";
         this.mTeamID="";
         this.mUserID="";
-        this.BASE_URL="http://huntr-api.herokuapp.com/";
+        this.API_BASE_URL="http://huntr-api.herokuapp.com/";
         return this;
     }
 
-    public HuntrAPI HuntrAPI(String gameID, String teamID, String userID){
+    public HuntrAPIClient HuntrAPIClient(String gameID, String teamID, String userID){
         this.mGameID=gameID;
         this.mTeamID=teamID;
         this.mUserID=userID;
-        this.BASE_URL="http://huntr-api.herokuapp.com/";
+        this.API_BASE_URL="http://huntr-api.herokuapp.com/";
         return this;
     }
 
-    public HuntrAPI withGameID(String gameID){
+    public HuntrAPIClient withGameID(String gameID){
         this.mGameID=gameID;
         return this;
     }
 
-    public HuntrAPI withUserID(String userID){
+    public HuntrAPIClient withUserID(String userID){
         this.mUserID=userID;
         return this;
     }
 
-    public HuntrAPI withTeamID(String teamID){
+    public HuntrAPIClient withTeamID(String teamID){
         this.mTeamID=teamID;
         return this;
     }
@@ -129,6 +143,109 @@ public class HuntrAPI {
         return isActive;
     }
 
+    public interface apiGetFunctionResponseHandler{
+        public void onSuccess(Object response);
+        public void onFailure(Object response);
+    }
+
+    public interface apiPostFunctionResponseHandler{
+        public void onSuccess(Object response);
+        public void onFailure(Object response);
+    }
+
+    public interface apiPostImageFunctionResponseHandler{
+        public void onSuccess(Object response);
+        public void onFailure(Object response);
+    }
+
+
+    public void callApiGetFunction(final Context currentContext, final String url, final String[] params /*gameID*/, final apiGetFunctionResponseHandler responseHandler){
+        StringBuilder builder = new StringBuilder("");
+        builder.append(API_BASE_URL).append(url);
+        for (String param : params) {
+            builder.append(param).append('/');
+        }
+        if (builder.charAt(builder.length()-1)=='/'){
+            builder.deleteCharAt(builder.length()-1);
+        }
+
+        String urlString = builder.toString();
+        String urlStr = "http://abc.dev.domain.com/0007AC/ads/800x480 15sec h.264.mp4";
+        URL url2;
+        URI uri;
+        try {
+            url2 = new URL(urlStr);
+        uri = new URI(url2.getProtocol(), url2.getUserInfo(), url2.getHost(), url2.getPort(), url2.getPath(), url2.getQuery(), url2.getRef());
+        url2 = uri.toURL();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        standingsRetrieved=false;
+        scoreboardclient.get(API_BASE_URL + API_SCOREBOARD + "/" + "api/game/scoreboard/" /*+ gameID*/, null,
+                new AsyncHttpResponseHandler() {
+                    // When the response returned by REST has Http response code '200'
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers,
+                                          byte[] response) {
+                        try {
+
+                            String example = new String(response);
+
+                            Gson g = new Gson();
+                            JsonParser parser = new JsonParser();
+                            Reader reader = new StringReader(example);
+                            //Reader serialreader = new StringReader(example);
+
+                            //scoreboard = g.fromJson(serialreader, ScoreBoard.class);
+                            JsonArray myScoreArray = g.fromJson(reader, JsonArray.class);
+                            JsonObject myScore;
+
+                            //try {
+                            standings.clear();
+                            for (int i = 0; i < myScoreArray.size(); i++) {
+                                myScore = myScoreArray.get(i).getAsJsonObject();
+                                ScoreBoardEntry myEntry = g.fromJson(myScore, ScoreBoardEntry.class);
+                                scoreboard.addEntry(myEntry);
+                                //Log.d("JSONLog", myScore.get("name").getAsString());
+                                standings.add(String.valueOf(myScore.get("ranking") + ". " + myScore.get("name").getAsString()));
+                            }
+                            standingsRetrieved = true;
+                            responseHandler.onSuccess(standings);
+
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // When the response returned by REST has Http response code other than '200'
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          byte[] content, Throwable error) {
+                        // Hide Progress Dialog
+                        standingsRetrieved = true;
+                        //prgDialog.hide();
+                        // When Http response code is '404'
+                        if (statusCode == 404) {
+                            Toast.makeText(currentContext.getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code is '500'
+                        else if (statusCode == 500) {
+                            Toast.makeText(currentContext.getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code other than 404, 500
+                        else {
+                            Toast.makeText(currentContext.getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]", Toast.LENGTH_LONG).show();
+                        }
+                        responseHandler.onFailure(standings);
+                    }
+                });
+
+    }
+
+
+
     public interface StandingsResponseHandler{
         public void onSuccess(ArrayList response);
         public void onFailure(ArrayList response);
@@ -169,9 +286,9 @@ public class HuntrAPI {
 
     }
 
-    public void getStandingsList(final Context currentContext, final String gameID, final StandingsResponseHandler responseHandler){
+    public void getStandingsList(final Context currentContext, final String gameID, final apiGetFunctionResponseHandler responseHandler){
         standingsRetrieved=false;
-        scoreboardclient.get(BASE_URL + "api/game/scoreboard/" + gameID, null,
+        scoreboardclient.get(API_BASE_URL + "api/game/scoreboard/" + gameID, null,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
@@ -275,7 +392,7 @@ public class HuntrAPI {
     }
 
     public void getGamesList(final Context currentContext, /*final String gameID,*/ final GamesResponseHandler responseHandler){
-        gamelistclient.get(BASE_URL + "api/games/simple", null,
+        gamelistclient.get(API_BASE_URL + "api/games/simple", null,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
@@ -371,8 +488,8 @@ public class HuntrAPI {
 
     }
 
-    public void getCluesList(final Context currentContext, final String gameID, final CluesResponseHandler responseHandler){
-        cluelistclient.get(BASE_URL + "api/clues/" +gameID, null,
+    public void getCluesList(final Context currentContext, final String gameID, final String teamID, final CluesResponseHandler responseHandler){
+        cluelistclient.get(API_BASE_URL + API_ANSWERS +"/" + gameID + "/" + teamID, null,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
